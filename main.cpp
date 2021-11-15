@@ -1,125 +1,94 @@
 #include <iostream>
 
-void	calculator();
+double getInput();
+char getOperation();
 
-double	getNumber(std::string);
-char	getOperation(std::string);
-double	add(double&, double&);
-double	sub(double&, double&);
-double	mul(double&, double&);
-double	div(double&, double&);
+namespace operations {
+
+	double add(const double x, const double y) {
+
+		std::cout << "\n" << x << " + " << y << " = " << x + y;
+		return x + y;
+
+	}
+
+	double sub(const double x, const double y) {
+
+		std::cout << x << " - " << y << " = " << x - y;
+		return x - y;
+
+	}
+
+	double mul(const double x, const double y) {
+
+		std::cout << "\n" << x << " * " << y << " = " << x * y;
+		return x * y;
+
+	}
+
+	double div(const double x, const double y) {
+
+		std::cout << "\n" << x << " / " << y << " = " << x * y;
+		return x / y;
+
+	}
+}
 
 int main() {
 
-	calculator();
-	
-}
+	char repeat = { 'Y' };
 
-void calculator() {
-
-	double numberOne{};
-	double numberTwo{};
-	double answer{};
-	char operation{ ' ' };
-
-	numberOne = getNumber("Enter a number : ");
-
-	operation = getOperation("\nEnter an operation (+, -, *, / ) : ");
-
-	numberTwo = getNumber("Enter a second number : ");
-
-
-	while (operation == '+' || operation == '-' || operation == '*' || operation == '/') {
-
+	while (repeat == 'Y' || repeat == 'y') {
+		double x{};
+		double y{};
+		char operation{};
+		x = getInput();
+		operation = getOperation();
+		y = getInput();
 
 		switch (operation) {
-
-		case '+':
-			answer = add(numberOne, numberTwo);
-			break;
-
-		case '-':
-			answer = sub(numberOne, numberTwo);
-			break;
-
-		case '*':
-			answer = mul(numberOne, numberTwo);
-			break;
-
-		case '/':
-			answer = div(numberOne, numberTwo);
-			break;
-		
+			case '+' :
+					operations::add(x, y);
+					break;
+			case '-' :
+					operations::sub(x, y);
+					break;
+			case '*' :
+					operations::mul(x, y);
+					break;
+			case '/' :
+					operations::div(x, y);
+					break;
 		}
 
-		operation = getOperation("\nEnter an operation (+, -, *, / ) | C to clear the first number | Any other key to exit : ");
+		std::cout << "\nRepeat? : ";
+		std::cin >> repeat;
 
-		if (operation == 'C' || operation == 'c'){
-
-			numberOne = getNumber("Enter a number : ");
-			operation = getOperation("\nEnter an operation (+, -, *, / ) : ");
-			numberTwo = getNumber("Enter a second number : ");
-
-		}
-		else if (operation == '+' || operation == '-' || operation == '*' || operation == '/') {
-
-			numberOne = answer;
-			numberTwo = getNumber("\nEnter a second number : ");
-
-		}
-		else
-			std::cout << "\nExiting\n";
 	}
-
+	std::cout << "\nThank you!";
+	return 0;
 }
 
 
-double getNumber(std::string message){
 
-	double numberOne{};
 
-	std::cout << message;
-	std::cin >> numberOne;
-
-	return numberOne;
-
+double getInput() {
+	double input{};
+	std::cout << "\nEnter a number : ";
+	std::cin >> input;
+	return input;
 }
 
-char getOperation(std::string message) {
+
+
+char getOperation() {
 
 	char operation{' '};
 
-	std::cout	<< message;
+	std::cout << "\nEnter an operation : + - * / or any other key to exit : ";
 	std::cin	>> operation;
 
 	return operation;
 
 }
 
-double add(double& x, double& y ){
-
-	std::cout << "\n" << x << " + " << y << " = " << x + y;
-	return x + y;
-
-}
-
-double sub(double& x, double& y) {
-
-	std::cout << x << " - " << y << " = " << x - y;
-	return x - y;
-
-}
-
-double mul(double& x, double& y) {
-
-	std::cout << "\n" << x << " * " << y << " = " << x * y;
-	return x * y;
-
-}
-
-double div(double& x, double& y) {
-
-	std::cout << "\n" << x << " / " << y << " = " << x * y;
-	return x / y;
-
-}
