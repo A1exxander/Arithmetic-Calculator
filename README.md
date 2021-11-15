@@ -1,2 +1,2 @@
 # Arithmetic-Calculator
-Basic arithmetic calculator I wrote when I first started programming
+Basic arithmetic calculator I wrote a long time ago when I first started programming
